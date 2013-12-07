@@ -1,7 +1,11 @@
 ActorShowtimes::Application.routes.draw do
-  get "actors/show"
-  get "actors/create"
-  get "actors/new"
+ 
+
+  root 'search#show'
+  get "search/show" => 'search#show', as: 'search'
+  get "actors/show" => 'actors#show', as: 'actor_show'
+  get "actors/index" => 'actor#index', as: 'actor_index'
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
