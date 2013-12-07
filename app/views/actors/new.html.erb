@@ -12,11 +12,17 @@
 
 
 <div class="search">
-<%= form_for @actor do |f| %>
-	<div>
-		<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
-	</div>
-	<br>
-	<%= f.submit "search by actor name" %>
-<% end %>
+
+	<%= form_for @actor do |f| %>
+		<div>
+			<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
+		</div>
+		<br>
+		<%= f.submit "search by actor name" %>
+	<% end %>
+
 </div>
+
+	<% if @msg %>
+		<div> <p><%= @msg %></p></div>
+	<% end %>
