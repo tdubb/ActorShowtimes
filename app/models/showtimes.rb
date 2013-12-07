@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=Austin,+TX&ei=JeSiUsuHDPOO2gWUy4CgCg&q=hunger+gams")) 
+doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=Austin,+TX&ei=JeSiUsuHDPOO2gWUy4CgCg&q=hunger+games")) 
 puts doc.class
 @ad1 = doc.css(".address")[0].text
 @ad2 = doc.css(".address")[1].text
