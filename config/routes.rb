@@ -1,10 +1,14 @@
 ActorShowtimes::Application.routes.draw do
  
-
   root 'actors#new'
-  get "/actors/new" => 'actors#new', as: 'new_actor'
-  post '/actors' => 'actors#create'
-  get "/actors/index" => 'actors#index', as: 'actor_index'
+  get '/actors' => 'actors#index', as: 'index'
+  resources :actors
+  # root 'actors#new'
+  # get '/actors' => 'actors#index'
+  # get "/actors/new" => 'actors#new', as: 'new_actor'
+  # post '/actors' => 'actors#create'
+  # get "/actors/index" => 'actors#index', as: 'actor_index'
+  # delete "/actors/:id" => 'actors#destroy'
   # get "/actors/:id" => 'actors#show', as: 'actor'
  
   # The priority is based upon order of creation: first created -> highest priority.

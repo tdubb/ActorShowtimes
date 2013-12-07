@@ -1,4 +1,9 @@
 <h1>Index</h1>
 
-
-
+<ol>
+<% @actors.each do |actor| %>
+	
+		<li><%= actor.name %> <%= link_to "Delete", actor, method: :delete, data: { confirm: "Are you sure you want to remove #{actor.name} from your list" } %></li>
+		
+	<% end %>
+</ol>
