@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'hirb'
 
+gem  'figaro'
+# Gem used to access www.themoviedb.org 
+gem 'themoviedb'
+
 gem 'nokogiri', '~> 1.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
