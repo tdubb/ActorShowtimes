@@ -5,43 +5,25 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.css">
 </head>
 <body>
   <!-- Nav Bar -->
 <div class="navbar">
   <div class="row header">
    
-    <div class="small-2 columns">
-     
-    </div>
-
-    <div class="small-2 columns">
-
+    <div class="small-10 columns">   
+    <h1>Actor Showtimes</h1>
     </div>
 
 
-    <div class="small-4 columns logodiv">
-          
-     
-      
-    </div>
-
-
-    <div class="small-1 columns">
-
-    </div>
-
-    <div class="small-1 columns">
-    </div>
-
-    <div class="small-1 columns ">
+    <div class="small-2 columns signin">
     <%= signed_in? ? 
-     (link_to raw("<h3 class ='signin'>Sign Out</h3>"), signout_path )
-    : ( link_to raw("<h3 class ='signin'>Sign In</h3>"), signin_path ) %>
+     (link_to raw("<h4 >Sign Out</h4>"), signout_path )
+    : ( link_to raw("<h4 class ='signin'>Sign In</h4>"), signin_path ) %>
     </div>
 
-   <div class="small-1 columns"> 
-   </div>
+  
 
   </div>
     </div>

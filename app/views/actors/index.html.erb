@@ -1,36 +1,53 @@
-<h1 style="margin-left:45px">My Actors</h1>
+<div class="row">
+  <div class="columns twelve centered">
+    
+	<h1 >My Actors</h1>
 
-<div class="search">
+	<div class="search centered">
 
-	<%= form_for @actor do |f| %>
-		<div>
-			<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
-		</div>
-		<br>
+		<%= form_for @actor do |f| %>
+			<div class="centered">
+				<%= f.text_field :name, placeholder: 'Tom Hanks...', :class=> 'centered' %>
+			</div>
+			<br>
 
-		<% if flash[:notice] %>
-    		<div class="notice"><%= flash[:notice] %></div>
-   	 		<br>
-  		<% end %>
+			<% if flash[:notice] %>
+    			<div class="notice"><%= flash[:notice] %></div>
+   	 			<br>
+  			<% end %>
 
-		<%= f.submit "search", :name => "search" %>
-		<%= f.submit "follow" %>
-	<% end %>
-</div>
-<ol>
-	<% @actors.each do |actor| %>
-	
-	<li>
-		<% if actor.picture_url.nil? %>
-			<%= image_tag 'no_profile.jpg' %>
-		<% else %>
-			<img src=<%= actor.picture_url %>
+			<div>
+			<%= f.submit "search", :name => "search" %>
+			<%= f.submit "follow" %>
+			</div>
 		<% end %>
-		<br>
-		<%= actor.name %> 
-		<%= link_to "Delete", actor, method: :delete %>		 
-		<%= link_to "Showtimes", actor %>
-	</li>
-		
-	<% end %>
-</ol>
+	</div>
+
+  </div>
+</div>
+
+
+<% count = 0 %>
+	
+<% @actors.each do |actor| %>
+	<%= "<div class='row'>".html_safe if count%4 ==0 %>
+	 	<div class="small-3 columns">
+
+			<div class="image-back">
+				<% if actor.picture_url.nil? %>
+					<%= image_tag( 'no_profile.jpg', :class =>"pic" )%>
+				<% else %>
+					<img class="pic" src=<%= actor.picture_url %>>
+				<% end %>
+			</div>
+			<div>
+				<%= actor.name %> 
+			</div>
+			<div>
+				<%= link_to "Delete", actor, method: :delete %>		 
+				<%= link_to "Showtimes", actor %>
+			</div>
+		</div>	
+	<% count = count +1 %>
+	<%= "</div >".html_safe if count%4 ==0 %>
+<% end %>
