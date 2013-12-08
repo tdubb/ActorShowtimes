@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  
+  extend ActiveModel::Naming
+
+
+
   def index
   end
 
@@ -12,11 +17,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
+      sign_in @user
       # Handle a successful save.
-       else
+      redirect_to @user 
+    else
       render 'new'
     end
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def edit
