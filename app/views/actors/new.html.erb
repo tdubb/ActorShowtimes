@@ -11,7 +11,10 @@
 <h1 class="centered">Actor Showtimes</h1>
 
 
-
+<div class="row">
+	<div class="large-4 columns">
+	</div>
+	<div clas="large-4 columns"
 <div class="search">
 
 	<%= form_for @actor do |f| %>
@@ -24,7 +27,7 @@
     		<div class="notice"><%= flash[:notice] %></div>
    	 		<br>
   		<% end %>
-
+		
 		<%= f.submit "search", :name => "search" %>
 		<% if signed_in? %>
 			<%= f.submit "follow" %>
@@ -34,4 +37,7 @@
 		<%= link_to 'My Actors', index_path %>
 		<% end %>
 
+</div>
+<div class="large-4 columns">
+	</div>
 </div>
