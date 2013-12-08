@@ -12,10 +12,16 @@
  *= require_tree .
  */
 .navbar{
-	background-color: black
+	background-color: gray
 }
 .signin a {
-  color: inherit;
+  
 	text-decoration: none;
 	color: white;
+}
+.image-back{
+border: 8px solid #666;
+}
+.pic{
+height: 170px;
 }

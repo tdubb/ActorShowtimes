@@ -7,11 +7,13 @@ body {
 }
 .centered {
 	text-align: center;
+	margin: 0 auto;
+
 }
 
 .search {
 	text-align: center;
-	width: 700px ;
+	
 	margin-left: auto ;
 	margin-right: auto ;
 }
@@ -21,6 +23,11 @@ body {
 	height: 22px;
 	font-size: larger;
 	text-align: center;
+}
+
+
+.new_actor {
+	margin: auto 0;
 }
 
 ol {
@@ -35,4 +42,7 @@ ol {
 }
 
 
-
+input.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
