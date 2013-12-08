@@ -5,12 +5,10 @@ body {
 	border: 1px;
 	border-color: black;
 }
-.centered {
-	text-align: center;
-	margin: 0 auto;
 
+.input{
+	
 }
-
 .search {
 	text-align: center;
 	
@@ -32,7 +30,11 @@ body {
 
 ol {
 	list-style-position: inside;
-
+margin-left: 20px
+}
+li {
+	margin-left: 20px
+	
 }
 
 .title {
@@ -45,4 +47,14 @@ ol {
 input.centered {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.centered {
+	text-align: center;
+	
+
+}
+
+.textfield {
+	margin-left: 42%;
 }

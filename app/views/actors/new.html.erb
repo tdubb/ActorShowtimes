@@ -8,17 +8,16 @@
 <br>
 <br>
 <br>
-<h1 class="centered">Actor Showtimes</h1>
+<h2 class="centered">Search for an actor</h2>
 
 
-<div class="row">
-	<div class="large-4 columns">
-	</div>
-	<div clas="large-4 columns"
-<div class="search">
+
+
+<div class="centered">
+
 
 	<%= form_for @actor do |f| %>
-		<div>
+		<div class="textfield">
 			<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
 		</div>
 		<br>
@@ -38,6 +37,5 @@
 		<% end %>
 
 </div>
-<div class="large-4 columns">
-	</div>
+
 </div>
