@@ -60,16 +60,18 @@ class ActorsController < ApplicationController
       actor = matches[0]
     end
 
-    #verify that these connection do not already exist before creating them
-    if !current_user.actors.exists?(actor)
-      current_user.actors << actor
+    if signed_in?
+      #verify that these connection do not already exist before creating them
+      if !current_user.actors.exists?(actor)
+        current_user.actors << actor
+      end
+      if !actor.users.exists?(current_user)
+        actor.users << current_user
+      end
     end
-    if !actor.users.exists?(current_user)
-      actor.users << current_user
-    end
-    
   	actor.save
-    @actors = Actor.all
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @actors = @user ? @user.actors.all : Actor.all
   	render 'app/views/actors/index.html.erb'
   end
 
