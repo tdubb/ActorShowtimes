@@ -1,7 +1,10 @@
 // Place all the styles related to the Actors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+body {
+	border: 1px;
+	border-color: black;
+}
 .centered {
 	text-align: center;
 	margin: 0 auto;
@@ -22,9 +25,22 @@
 	text-align: center;
 }
 
+
 .new_actor {
 	margin: auto 0;
 }
+
+ol {
+	list-style-position: inside;
+
+}
+
+.title {
+	font-size: 1.2em;
+	margin-left: 20px;
+	color: blue;
+}
+
 
 input.centered {
 	margin-left: auto;

@@ -1,41 +1,56 @@
-<body style="text-align: center">
-<% require 'nokogiri' %>
-<% require 'open-uri' %>
+<body>
+<% require "nokogiri" %>
+<% require "open-uri" %>
 
 
-<h1>ActorShowtimes</h1>
 
-<p>
-	<%= @actor.name %>
-<br>
-	<% if @actor.picture_url.nil? %>
-		<%= image_tag 'no_profile.jpg' %>
+	<div class="row">
+		<div class="large-6 columns">
+	<% if @flicks.empty? %>
+	<p>Sorry to report but we are not aware of any current playing movies starring <%=@actor.name %></p>
 	<% else %>
-		<img src=<%= @actor.picture_url %>
-		<% end %>
-<br>
-<% if @flicks.empty? %>
-<p>Sorry to report but we are not aware of any current playing movies starring <%=@actor.name %></p>
-<% else %>
-<img style="align: right; size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x300&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= @ad1 %>&amp;markers=color:green%7Clabel:2%7C2901$<%= @ad2 %>&amp;markers=color:green%7Clabel:3%7C2901$<%= @ad3 %>" alt="Austin, TX">
-
-
-<ol>
-	 <li>
-	 	<% @flicks.each do |name, theater| %>
-		<br>
-		<%= theater.name %>
-		<br>
-		<%= theater.address %>
-		<br>
-			<% theater.films.each do |title, film| %>
-
-				<%= film.title %>
+	<ol>
+		 
+		 	<% @flicks.each do |name, theater| %>
+			<br>
+		<li>
+			<%= theater.name %>
+		</li>
+			
+			<%= theater.address %>
+			
+				<% theater.films.each do |title, film| %>
 				<br>
-					<%= film.times %>
+					<span class="title"><%= film.title %></span>
 				<br>
+						<%= film.times.gsub(/(nbsp)/, " ") %>
+					<br>
+				<% end %>
 			<% end %>
+		
+	 </ol>
+	</div>
+	 <div class="large-6 columns">
+	 	<div style="text-align:center"
+	 		<h1>ActorShowtimes</h1>
+	<% address_array = [] %>
+	<% @flicks.each do |name, theater| %>
+			<% address_array << theater.address %>
+	<% end %>
+
+	<p>
+		<%= @actor.name %>
+	<br>
+		<% if @actor.picture_url.nil? %>
+			<%= image_tag 'no_profile.jpg' %>
+		<% else %>
+			<img src=<%= @actor.picture_url %>>
 		<% end %>
-	</li>
- </ol>
-<% end %>
+		</div>
+	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
+	
+	<% end %>
+
+	</div>
+</div>
+</body>
