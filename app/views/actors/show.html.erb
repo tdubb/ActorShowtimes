@@ -5,7 +5,10 @@
 
 
 	<div class="row">
-		<div class="large-6 columns">
+	<div class="small-1 columns" > &nbsp</div>
+		<div class="small-5 columns">
+
+
 	<% if @flicks.empty? %>
 	<p>Sorry to report but we are not aware of any current playing movies starring <%=@actor.name %></p>
 	<% else %>
@@ -29,17 +32,18 @@
 			<% end %>
 		
 	 </ol>
+	 <% end %>
 	</div>
-	 <div class="large-6 columns">
-	 	<div style="text-align:center"
-	 		<h1>ActorShowtimes</h1>
+	 <div class="small-6 columns">
+	 	<div style="text-align:center">
+	 		
 	<% address_array = [] %>
 	<% @flicks.each do |name, theater| %>
 			<% address_array << theater.address %>
 	<% end %>
 
 	<p>
-		<%= @actor.name %>
+		<h3><%= @actor.name %></h3>
 	<br>
 		<% if @actor.picture_url.nil? %>
 			<%= image_tag 'no_profile.jpg' %>
@@ -47,6 +51,7 @@
 			<img src=<%= @actor.picture_url %>>
 		<% end %>
 		</div>
+		<% if !@flicks.empty? %>
 	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
 	
 	<% end %>
