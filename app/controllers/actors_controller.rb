@@ -17,7 +17,7 @@ class ActorsController < ApplicationController
 
     #error checking
     if actors.length ==0 
-      @msg = "Unfortunately we do not have an actor with this name in our system"
+      flash[:notice] = "Oh no...we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
       render 'app/views/actors/new.html.erb'
       return
@@ -30,7 +30,7 @@ class ActorsController < ApplicationController
 
     #error checking
     if first_actor.nil? 
-      @msg = "Unfortunately we do not have an actor with this name in our system"
+      flash[:notice] = "Oh no....we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
       render 'app/views/actors/new.html.erb'
       return

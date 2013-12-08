@@ -11,6 +11,7 @@
 <h1 class="centered">Actor Showtimes</h1>
 
 
+
 <div class="search">
 
 	<%= form_for @actor do |f| %>
@@ -18,11 +19,13 @@
 			<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
 		</div>
 		<br>
+
+		<% if flash[:notice] %>
+    		<div class="notice"><%= flash[:notice] %></div>
+   	 		<br>
+  		<% end %>
+
 		<%= f.submit "search by actor name" %>
 	<% end %>
 
 </div>
-
-	<% if @msg %>
-		<div> <p><%= @msg %></p></div>
-	<% end %>

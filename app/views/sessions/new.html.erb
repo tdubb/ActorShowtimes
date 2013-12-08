@@ -2,6 +2,12 @@
 
 <div class="row">
   <div class="span6 offset3">
+
+    <% if flash[:notice] %>
+        <div class="error"><%= flash[:notice] %></div>
+        <br>
+      <% end %>
+
     <%= form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.label :email %>

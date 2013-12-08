@@ -8,8 +8,14 @@ ActorShowtimes::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup' => 'users#new'
-  get '/signin' => 'sessions#new'
+  get '/signin' => 'sessions#new', as: :signin
+  post 'signin', controller: :logins, action: :create
   get '/singout' => 'sessions#destroy'
+
+  # get 'signin', controller: :logins, action: :new, as: :signin
+  # post 'signin', controller: :logins, action: :create
+  # delete 'logout', controller: :logins, action: :destroy, as: :logout
+
   # root 'actors#new'
   # get '/actors' => 'actors#index'
   # get "/actors/new" => 'actors#new', as: 'new_actor'
