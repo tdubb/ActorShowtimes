@@ -1,4 +1,5 @@
 require 'themoviedb'
+require_relative './scraper'
 
 class ActorsController < ApplicationController
   
@@ -17,7 +18,8 @@ class ActorsController < ApplicationController
     #error checking
     if actors.length ==0 
       @msg = "Unfortunately we do not have an actor with this name in our system"
-      redirect_to root_path
+      @actor = Actor.new
+      render 'app/views/actors/new.html.erb'
       return
     end
 
@@ -29,9 +31,13 @@ class ActorsController < ApplicationController
     #error checking
     if first_actor.nil? 
       @msg = "Unfortunately we do not have an actor with this name in our system"
-      redirect_to root_path
+      @actor = Actor.new
+      render 'app/views/actors/new.html.erb'
       return
     end
+
+    #save the id
+    actor.movie_db_id = first_actor.id
 
     # bring up the images associated withthis actor
     format_array = Tmdb::People.images(first_actor.id)["profiles"]
@@ -41,22 +47,42 @@ class ActorsController < ApplicationController
 
     #configuration is needed to get the base_url where the images can be accessed
     configuration = Tmdb::Configuration.new
+    if !pic_hash.nil?
+        # form the URL, configuration.profile_sizes => w45,w185, h632, original
+        actor.picture_url = "#{configuration.base_url}#{configuration.profile_sizes[1]}#{pic_hash["file_path"]}"  
+    end
 
-    # form the URL, configuration.profile_sizes => w45,w185, h632, original
-    actor.picture_url = "#{configuration.base_url}#{configuration.profile_sizes[1]}#{pic_hash["file_path"]}"  
+
 
     #save the actor with the picture_url to the database
   	actor.save
-  	redirect_to index_path
+    @actors = Actor.all
+  	render 'app/views/actors/index.html.erb'
   end
 
   def index
   	@actors = Actor.all
-
   end
 
   def show
   	@actor = Actor.find(params[:id])
+    #given actor store the movie they are inovies
+    actors_movies_ids = get_actors_movies_ids(@actor.movie_db_id)  
+    
+    #check current movies for actor
+    actors_current_films = get_actors_playing_films(actors_movies_ids)
+    
+
+####################################
+## Add error msg to use about their being no current playing films
+################################################
+   @flicks={}
+ 
+    if actors_current_films.length > 0
+      scrappy = Scraper.new
+      scrappy.search_for_films(actors_current_films)
+      @flicks = scrappy.theatres
+    end
   end
 
    def destroy
@@ -70,6 +96,27 @@ class ActorsController < ApplicationController
   	params.require(:actor).permit(:name)
   end
 
-end
+ #given actor store the movie they are inovies
+  def get_actors_movies_ids(actor_moviedb_id)  
+    credits = Tmdb::People.credits(actor_moviedb_id)
+    actors_movies = credits["cast"]
+    actors_movies_ids = []
+    actors_movies.each do |movie|
+      actors_movies_ids << movie["id"]
+    end
+    actors_movies_ids
+  end
+    
+  def get_actors_playing_films(actors_movies_ids)
+    films = Tmdb::Movie.now_playing
+    actors_playing_films = []
+    films.each do |x|
+      title = x["title"]
+      if actors_movies_ids.include? x["id"]
+        actors_playing_films << title
+      end
+    end
+    actors_playing_films
+  end
 
-       
+end     
