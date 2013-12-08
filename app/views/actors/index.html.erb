@@ -1,11 +1,17 @@
 <h1>Index</h1>
 
+<%= @flicks %>
+
 <ol>
-<% @actors.each do |actor| %>
+	<% @actors.each do |actor| %>
 	
-		<li>
-<img src=<%= actor.picture_url %><br>
-		<%= actor.name %> <%= link_to "Delete", actor, method: :delete, data: { confirm: "Are you sure you want to remove #{actor.name} from your list" } %></li>
+	<li>
+		<img src=<%= actor.picture_url %>
+		<br>
+		<%= actor.name %> 
+		<%= link_to "Delete", actor, method: :delete, data: { confirm: "Are you sure you want to remove #{actor.name} from your list" } %>		 
+		<%= link_to "Showtimes", actor %>
+	</li>
 		
 	<% end %>
 </ol>
