@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'hirb'
 
+gem 'bootstrap-sass'
+
 gem 'bcrypt-ruby'
 
 gem  'figaro'

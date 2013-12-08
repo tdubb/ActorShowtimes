@@ -5,6 +5,11 @@ ActorShowtimes::Application.routes.draw do
   get '/actors' => 'actors#index', as: 'index'
   resources :actors
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get '/signup' => 'users#new'
+  get '/signin' => 'sessions#new'
+  get '/singout' => 'sessions#destroy'
   # root 'actors#new'
   # get '/actors' => 'actors#index'
   # get "/actors/new" => 'actors#new', as: 'new_actor'
