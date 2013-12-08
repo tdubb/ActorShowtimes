@@ -4,8 +4,6 @@ gem 'hirb'
 
 gem 'bootstrap-sass'
 
-gem 'bcrypt-ruby'
-
 gem  'figaro'
 # Gem used to access www.themoviedb.org 
 gem 'themoviedb'
