@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   
   extend ActiveModel::Naming
 
-
-
   def index
+    # Added for debug only. Remove later
+    @users = User.all
   end
 
   def new

@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="span6 offset3">
-  
+
   <% if @user.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -23,16 +23,16 @@
 
       <%= f.label :name %>
       <%= f.text_field :name %>
-<br>
+      <br>
       <%= f.label :email %>
       <%= f.text_field :email %>
-<br>
+      <br>
       <%= f.label :password %>
       <%= f.password_field :password %>
-<br>
+      <br>
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
-<br>
+      <br>
       <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

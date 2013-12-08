@@ -55,14 +55,20 @@ class ActorsController < ApplicationController
 
 
     #save the actor with the picture_url to the database
+    current_user.actors << actor
   	actor.save
     @actors = Actor.all
   	render 'app/views/actors/index.html.erb'
   end
 
+  # def index
+  # 	@actors = Actor.all
+  # end
   def index
-  	@actors = Actor.all
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @actors = @user ? @user.actors.all : Actor.all
   end
+
 
   def show
   	@actor = Actor.find(params[:id])
@@ -72,11 +78,7 @@ class ActorsController < ApplicationController
     #check current movies for actor
     actors_current_films = get_actors_playing_films(actors_movies_ids)
     
-
-####################################
-## Add error msg to use about their being no current playing films
-################################################
-   @flicks={}
+    @flicks={}
  
     if actors_current_films.length > 0
       scrappy = Scraper.new

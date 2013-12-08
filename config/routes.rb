@@ -7,6 +7,11 @@ ActorShowtimes::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
+  resources :users do
+    resources :actors, only: [:index, :show]
+  end
+
+
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new', as: :signin
   post 'signin', controller: :logins, action: :create

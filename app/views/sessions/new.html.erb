@@ -4,15 +4,16 @@
   <div class="span6 offset3">
 
     <% if flash[:notice] %>
-        <div class="error"><%= flash[:notice] %></div>
+        <div class="error"><%= flash[:notice] %>
+        </div>
         <br>
-      <% end %>
+    <% end %>
 
     <%= form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.label :email %>
       <%= f.text_field :email %>
-<br>
+      <br>
       <%= f.label :password %>
       <%= f.password_field :password %>
 

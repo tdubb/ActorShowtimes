@@ -1,1 +1,27 @@
+<h1>All the users!</h1>
+<ul>
 
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to "Followed Actors", user_actors_path(user.id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br />
+<%= link_to 'Create User', new_user_path %>
+<br />
