@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'hirb'
 
+gem 'bcrypt-ruby', '3.1.2'
+
 gem  'figaro'
 # Gem used to access www.themoviedb.org 
 gem 'themoviedb'

@@ -1,5 +1,10 @@
 ActorShowtimes::Application.routes.draw do
  
+  get "users/edit"
+  get "users/new"
+  get "users/update"
+  get "users/create"
+  get "users/delete"
   root 'actors#new'
   get '/actors' => 'actors#index', as: 'index'
   resources :actors
