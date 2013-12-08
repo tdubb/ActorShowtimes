@@ -8,7 +8,11 @@
 <p>
 	<%= @actor.name %>
 <br>
-	<img src="<%= @actor.picture_url %>"> 
+	<% if @actor.picture_url.nil? %>
+		<%= image_tag 'no_profile.jpg' %>
+	<% else %>
+		<img src=<%= @actor.picture_url %>
+		<% end %>
 <br>
 <% if @flicks.empty? %>
 <p>Sorry to report but we are not aware of any current playing movies starring <%=@actor.name %></p>

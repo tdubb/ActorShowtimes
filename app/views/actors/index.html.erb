@@ -5,7 +5,11 @@
 	<% @actors.each do |actor| %>
 	
 	<li>
-		<img src=<%= actor.picture_url %>
+		<% if actor.picture_url.nil? %>
+			<%= image_tag 'no_profile.jpg' %>
+		<% else %>
+			<img src=<%= actor.picture_url %>
+		<% end %>
 		<br>
 		<%= actor.name %> 
 		<%= link_to "Delete", actor, method: :delete %>		 
