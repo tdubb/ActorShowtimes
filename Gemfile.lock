@@ -61,7 +61,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    mini_portile (0.5.1)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
@@ -125,7 +125,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt-ruby (= 3.1.2)
+  bcrypt-ruby
   coffee-rails (~> 4.0.0)
   figaro
   foundation-rails
