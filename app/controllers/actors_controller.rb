@@ -36,6 +36,9 @@ class ActorsController < ApplicationController
       return
     end
 
+    #save the id
+    actor.movie_db_id = first_actor.id
+
     # bring up the images associated withthis actor
     format_array = Tmdb::People.images(first_actor.id)["profiles"]
 
@@ -49,23 +52,7 @@ class ActorsController < ApplicationController
         actor.picture_url = "#{configuration.base_url}#{configuration.profile_sizes[1]}#{pic_hash["file_path"]}"  
     end
 
-    #given actor store the movie they are inovies
-    actors_movies_ids = get_actors_movies_ids(first_actor.id)  
-    
-    #check current movies for actor
-    actors_current_films = get_actors_playing_films(actors_movies_ids)
-    
 
-####################################
-## Add error msg to use about their being no current playing films
-################################################
-   @flicks={}
- 
-    if actors_current_films.length > 0
-      scrappy = Scraper.new
-      scrappy.search_for_films(agitctors_current_films)
-      @flicks = scrappy.theatres
-    end
 
     #save the actor with the picture_url to the database
   	actor.save
@@ -79,7 +66,23 @@ class ActorsController < ApplicationController
 
   def show
   	@actor = Actor.find(params[:id])
+    #given actor store the movie they are inovies
+    actors_movies_ids = get_actors_movies_ids(@actor.movie_db_id)  
+    
+    #check current movies for actor
+    actors_current_films = get_actors_playing_films(actors_movies_ids)
+    
 
+####################################
+## Add error msg to use about their being no current playing films
+################################################
+   @flicks={}
+ 
+    if actors_current_films.length > 0
+      scrappy = Scraper.new
+      scrappy.search_for_films(actors_current_films)
+      @flicks = scrappy.theatres
+    end
   end
 
    def destroy
