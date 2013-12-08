@@ -18,62 +18,73 @@ require 'open-uri'
 # puts doc.css(".name")[2].text
 # puts @ad3
 # puts doc.css(".times")[2].text
-class Scraper
-	attr_reader :theares
 
-	def initialize()
-		@theares = {}
-	end
-	
-	def get_loocation
-		return "Austin,+Tx"
-	end
 
-	def convert(name)
-		return name.gsub(" ", "+")
-	end
+<ol>
+	 <li>
+	 	<% @theaters.each do |theater| %>
+		<%= theater.name %>
+		<br>
+		<=% theater.address %>
+		<br>
+			<% theater.films.each do |film| %>
+				<%= film.title %>
+				<br>
+				<% film.times.each do |time| %>
+					<%= time %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</li>
+ </ol>
 
-	def search_for_films(names)
+ <!-- <!-- <!-- <!-- 
+ <img src="<%= @actor.picture_url %>">
+ <br>
+ <% @film_names = ['Thor', 'Frozen'] %>
+ <% @film_names.each do |film_name| %>
 
-		location = get_location
-		names.each do |film_name|
-			name = convert(film_name)
-			doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=#{get_location}&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{name}")) 
-			
-			#theatre name loop
-			doc.css(".name").each do |theatre_name|
-				if !@theares[theatre_name.text]
-					@theares[theatre_name] = Theatre.new(theatre_name.text)
-					if !@theares[theatre_name.text].films[film_name]
-						@theares[theatre_name.text].films[film_name] = Film.new(film_name)
-				end
-			end
+ <% doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=Austin,+TX&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{film_name}")) %>
 
-			#addres loop
-			doc.css(".address").each_with_index do |address,index|
-				@theares[doc.css(".name")[index]].address = address.text
-			end
+<%=  doc.css(".address").length > 0 ? @ad1 = doc.css(".address")[0].text : nil  %>
 
-			#times loop
-			doc.css(".times").each_with_index do |times,index|
-				@theares[theatre_name.text].films[film_name].times = times.text		 
-			end
-		end
-  end
-end
+<ol>
+	<li style="text-align:center; list-style-position:inside">
+		<%= doc.css(".name").length > 0 ? doc.css(".name")[0].text : nil %>
+		<br>
+		<%= @ad1 %>
+		<br>
+		<%= doc.css(".times").length > 0 ? doc.css(".times")[0].text : nil %>
+		</p>
+	</li> --> --> --> -->
+<!-- 	<li style="text-aling:center; list-style-position:inside">
+		# <= doc.css(".name")[1].text %>
+		<br>
+		<%= @ad2 %>
+		<br>
+		<= doc.css(".times")[1].text %>
+		</p>
+	</li>
+	<li style="text-aling:center; list-style-position:inside">
+		<= doc.css(".name")[2].text %>
+		<br>
+		<%= @ad3 %>
+		<br>
+		<= doc.css(".times")[2].text %>
+		</p>
+	</li> -->
+</ol>
 
-class Theatre
-	@name
-	@address
-	@films   #hash film_name, film obj
-	def initialize(name ="")
-		@name =name
-	end
-end
+<% end %>
 
-class Film
-	attre_reader :title, :times
-	def initialize(name ="")
-		@title =name
-	end
-end
+</body>
+
+
+
+
+
+
+
+<!-- <img id="event_map" src="http://maps.googleapis.com/maps/api/staticmap?center=AustinTX&zoom=13&sensor=false&size=600x300&key=AIzaSyAsl-bySeZhlYKZkQL1UI_DIeHQVgoZCFo">
+ -->
+

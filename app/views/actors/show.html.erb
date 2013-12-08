@@ -1,15 +1,15 @@
-<h1>Actors#show</h1>
+<body style="text-align: center">
+<% require 'nokogiri' %>
+<% require 'open-uri' %>
 
-<p>actor name
+
+<h1>ActorShowtimes</h1>
+
+<p>
 	<%= @actor.name %>
 <br>
-actor picture
- <%= @actor.picture_url %>
-</p>
 
 
-<!-- <img id="event_map" src="http://maps.googleapis.com/maps/api/staticmap?center=AustinTX&zoom=13&sensor=false&size=600x300&key=AIzaSyAsl-bySeZhlYKZkQL1UI_DIeHQVgoZCFo">
- -->
+<img style="align: right; size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x300&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= @ad1 %>&amp;markers=color:green%7Clabel:2%7C2901$<%= @ad2 %>&amp;markers=color:green%7Clabel:3%7C2901$<%= @ad3 %>" alt="Austin, TX">
 
-<img border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;zoom=13&amp;size=600x300&amp;sensor=false" alt="Austin, TX">
 
