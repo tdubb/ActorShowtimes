@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+.navbar{
+	background-color: black
+}
+.signin a, a:visited, a:hover, a:active {
+  color: inherit;
+	text-decoration: none;
+	color: white;
+}

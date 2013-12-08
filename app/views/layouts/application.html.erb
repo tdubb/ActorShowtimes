@@ -7,6 +7,45 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- Nav Bar -->
+<div class="navbar">
+  <div class="row header">
+   
+    <div class="small-2 columns">
+     
+    </div>
+
+    <div class="small-2 columns">
+
+    </div>
+
+
+    <div class="small-4 columns logodiv">
+          
+     
+      
+    </div>
+
+
+    <div class="small-1 columns">
+
+    </div>
+
+    <div class="small-1 columns">
+    </div>
+
+    <div class="small-1 columns ">
+    <%= signed_in? ? 
+     (link_to raw("<h3 class ='signin'>Sign Out</h3>"), signout_path )
+    : ( link_to raw("<h3 class ='signin'>Sign In</h3>"), signin_path ) %>
+    </div>
+
+   <div class="small-1 columns"> 
+   </div>
+
+  </div>
+    </div>
+  <!-- End Nav -->
 
 <%= yield %>
 

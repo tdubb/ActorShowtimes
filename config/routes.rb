@@ -15,7 +15,7 @@ ActorShowtimes::Application.routes.draw do
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new', as: :signin
   post 'signin', controller: :logins, action: :create
-  get '/singout' => 'sessions#destroy'
+  get '/singout' => 'sessions#destroy', as: :signout
 
   # get 'signin', controller: :logins, action: :new, as: :signin
   # post 'signin', controller: :logins, action: :create

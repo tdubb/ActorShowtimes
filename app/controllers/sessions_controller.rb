@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
 
 	def destroy
 		sign_out
-		redirect_to root_path
+    @actor = Actor.new
+		render 'app/views/actors/new.html.erb'
 	end
 
   # def create
