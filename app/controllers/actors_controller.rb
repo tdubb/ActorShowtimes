@@ -52,10 +52,22 @@ class ActorsController < ApplicationController
         actor.picture_url = "#{configuration.base_url}#{configuration.profile_sizes[1]}#{pic_hash["file_path"]}"  
     end
 
+    ####
+    # Here we need to check to see if an actor is already is in the db
+    # If so we need to grab that copy
+    matches = Actor.where(:movie_db_id => actor.movie_db_id)
+    if matches.length> 0
+      actor = matches[0]
+    end
 
-
-    #save the actor with the picture_url to the database
-    current_user.actors << actor
+    #verify that these connection do not already exist before creating them
+    if !current_user.actors.exists?(actor)
+      current_user.actors << actor
+    end
+    if !actor.users.exists?(current_user)
+      actor.users << current_user
+    end
+    
   	actor.save
     @actors = Actor.all
   	render 'app/views/actors/index.html.erb'
@@ -89,7 +101,12 @@ class ActorsController < ApplicationController
 
    def destroy
       @actor = Actor.find(params[:id])
-      @actor.destroy
+      if @actor.users.size <= 1 
+        @actor.destroy
+      else
+        @actor.users.delete(current_user)
+      end
+        
       redirect_to index_path
     end
 
