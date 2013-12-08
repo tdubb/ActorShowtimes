@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       # Handle a successful save.
-      redirect_to @user 
+      redirect_to 'app/views/actor/index.html.erb'
     else
       render 'new'
     end

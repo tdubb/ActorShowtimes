@@ -25,7 +25,13 @@
    	 		<br>
   		<% end %>
 
-		<%= f.submit "search by actor name" %>
+		<%= f.submit "search", :name => "search" %>
+		<% if signed_in? %>
+			<%= f.submit "follow" %>
+		<% end %>
 	<% end %>
+	<br> <% if signed_in? %> 
+		<%= link_to 'My Actors', index_path %>
+		<% end %>
 
 </div>

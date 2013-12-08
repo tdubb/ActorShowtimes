@@ -1,6 +1,22 @@
-<h1>Index of all actors that the user is following</h1>
+<h1 style="margin-left:45px">My Actors</h1>
 
+<div class="search">
 
+	<%= form_for @actor do |f| %>
+		<div>
+			<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
+		</div>
+		<br>
+
+		<% if flash[:notice] %>
+    		<div class="notice"><%= flash[:notice] %></div>
+   	 		<br>
+  		<% end %>
+
+		<%= f.submit "search", :name => "search" %>
+		<%= f.submit "follow" %>
+	<% end %>
+</div>
 <ol>
 	<% @actors.each do |actor| %>
 	

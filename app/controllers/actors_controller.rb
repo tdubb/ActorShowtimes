@@ -72,13 +72,18 @@ class ActorsController < ApplicationController
   	actor.save
     @user = User.find(params[:user_id]) if params[:user_id]
     @actors = @user ? @user.actors.all : Actor.all
-  	render 'app/views/actors/index.html.erb'
+  	if params[:search]
+      redirect_to actor
+    else
+      redirect_to index_path
+    end
   end
 
   # def index
   # 	@actors = Actor.all
   # end
   def index
+    @actor = Actor.new
     @user = User.find(params[:user_id]) if params[:user_id]
     @actors = @user ? @user.actors.all : Actor.all
   end
