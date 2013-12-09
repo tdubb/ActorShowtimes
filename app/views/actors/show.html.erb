@@ -4,13 +4,16 @@
 
 
 
+
+
 	<div class="row">
 	<div class="small-1 columns" > &nbsp</div>
 		<div class="small-5 columns">
 
 
 	<% if @flicks.empty? %>
-	<p>Sorry to report but we are not aware of any current playing movies starring <%=@actor.name %></p>
+	<p>Sorry to report but we are not aware of any current playing movies starring:</p>
+	<h3><%= @actor.name %></h3>
 	<img src=<%=@actor.picture_url%>>
 	<% else %>
 	<ol>
@@ -44,15 +47,19 @@
 	<% end %>
 
 	<p>
-		<h3><%= @actor.name %></h3>
+		
 	<br>
 		<% if @actor.picture_url.nil? %>
+			<h3><%= @actor.name %></h3>
 			<%= image_tag 'no_profile.jpg' %>
-		<% else %>
-			<img src="<%= @actor.picture_url %>">
 		<% end %>
 		</div>
 		<% if !@flicks.empty? %>
+		<div class="centered">
+		<h3><%= @actor.name %></h3>
+		<br>
+		<img src=<%= @actor.picture_url %>>
+		</div>
 	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
 	
 	<% end %>
