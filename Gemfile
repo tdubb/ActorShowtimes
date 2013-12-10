@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails_12factor'
 
 gem 'hirb'
 
@@ -51,6 +50,8 @@ gem 'foundation-rails'
 
 group :production do
 	gem 'pg'
+	gem 'rails_12factor'
+
 end
 
 # Use ActiveModel has_secure_password
