@@ -26,5 +26,6 @@ module ActorShowtimes
     console do 
         Hirb.enable
     end
+    config.assets.initialize_on_precompile = false
   end
 end
