@@ -1,0 +1,68 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+.navbar{
+	background-color: gray
+}
+.signin a {
+  
+	text-decoration: none;
+	color: white;
+}
+.image-back{
+border: 8px solid #666;
+}
+.pic{
+height: 170px;
+}
+body {
+  border: 1px;
+  border-color: black; }
+
+.search {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }
+
+#actor_name {
+  width: 200px;
+  height: 35px;
+  font-size: larger;
+  text-align: center; }
+
+.new_actor {
+  margin: auto 0; }
+
+ol {
+  list-style-position: inside;
+  margin-left: 20px; }
+
+li {
+  margin-left: 20px; }
+
+.title {
+  font-size: 1.2em;
+  margin-left: 20px;
+  color: blue; }
+
+input.centered {
+  margin-left: auto;
+  margin-right: auto; }
+
+.centered {
+  text-align: center;
+  padding: 0, 0, 0, 0; }
+
+.textfield {
+  margin-left: 42%; }
