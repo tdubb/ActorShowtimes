@@ -20,7 +20,8 @@ class Scraper
 
 		location = get_location
 		names.each do |film_name|
-			name = convert(film_name)
+			# I'm temporarily taking out the convert method because it is throwing an error in heroku
+			name = film_name
 			doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=#{get_location}&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{name}")) 
 		
 			#theatre name loop
