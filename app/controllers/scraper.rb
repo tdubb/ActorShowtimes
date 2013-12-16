@@ -3,25 +3,23 @@ require 'open-uri'
 
 class Scraper
 	attr_reader :theatres
+	attr_accessor :location
 
 	def initialize()
 		@theatres = {}
+		# @location = "Austin,+Tx" 
+		@location = "78757"
 	end
 	
-	def get_location
-		return "Austin,+Tx"
-	end
-
 	def convert(name)
 		return name.gsub(" ", "+")
 	end
 
 	def search_for_films(names)
 
-		location = get_location
 		names.each do |film_name|
 			name = convert(film_name)
-			doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=#{get_location}&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{name}")) 
+			doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=#{@location}&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{name}")) 
 		
 			#theatre name loop
 			doc.css(".name").each do |theatre_name|
