@@ -9,7 +9,7 @@ class Scraper
 	end
 	
 	def get_location
-		return "Austin,+Tx"
+		return "84101"
 	end
 
 	def convert(name)
