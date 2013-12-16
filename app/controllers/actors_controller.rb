@@ -1,3 +1,4 @@
+
 require 'themoviedb'
 require_relative './scraper'
 
@@ -8,6 +9,16 @@ class ActorsController < ApplicationController
   end
 
   def create
+   # render  params.inspect 
+
+    #error checking for empty name
+    if params[:actor][:name].length ==0 
+      flash[:notice] = "You may have forgotten to put an actor to search for?"
+      @actor = Actor.new
+      render 'app/views/actors/new.html.erb'
+      return
+    end 
+
   	actor = Actor.new(actor_params)
 
     Tmdb::Api.key(ENV['THEMOVIEDB_API_KEY'])
@@ -71,9 +82,11 @@ class ActorsController < ApplicationController
     end
   	actor.save
     @user = User.find(params[:user_id]) if params[:user_id]
-    @actors = @user ? @user.actors.all : Actor.all
+    
+
   	if params[:search]
-      redirect_to actor
+      redirect_to actor_path(actor.id, {:zipcode => params[:actor][:zipcode]})
+      # redirect_to :controller => 'actors',:action => 'show', :id => actor.id, :zipcode => params[:actor][:zipcode]
     else
       redirect_to index_path
     end
@@ -90,6 +103,7 @@ class ActorsController < ApplicationController
 
 
   def show
+    # render  params.inspect
   	@actor = Actor.find(params[:id])
     #given actor store the movie they are inovies
     actors_movies_ids = get_actors_movies_ids(@actor.movie_db_id)  
@@ -98,9 +112,10 @@ class ActorsController < ApplicationController
     actors_current_films = get_actors_playing_films(actors_movies_ids)
     
     @flicks={}
- 
+  @zipcode = params[:zipcode]
     if actors_current_films.length > 0
       scrappy = Scraper.new
+      scrappy.location = params[:zipcode]
       scrappy.search_for_films(actors_current_films)
       @flicks = scrappy.theatres
     end
