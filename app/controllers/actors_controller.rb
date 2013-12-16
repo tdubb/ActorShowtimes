@@ -55,7 +55,7 @@ class ActorsController < ApplicationController
     ####
     # Here we need to check to see if an actor is already is in the db
     # If so we need to grab that copy
-    matches = Actor.where(:movie_db_id => actor.movie_db_id)
+    matches = Actor.where(:movie_db_id => "#{actor.movie_db_id)"
     if matches.length> 0
       actor = matches[0]
     end
