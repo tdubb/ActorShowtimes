@@ -60,7 +60,7 @@
 		<br>
 		<img src=<%= @actor.picture_url %>>
 		</div>
-	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Austin,TX&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
+	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
 	
 	<% end %>
 
