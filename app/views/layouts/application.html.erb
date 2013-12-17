@@ -12,22 +12,36 @@
 <div class="navbar">
   <div class="row header">
    
-    <div class="small-10 columns">   
+    <div class="small-9 columns">   
     <h1>Actor Showtimes</h1>
     </div>
 
 
-    <div class="small-2 columns signin">
-    <%= signed_in? ? 
-     (link_to raw("<h4 >Sign Out</h4>"), signout_path )
-    : ( link_to raw("<h4 class ='signin'>Sign In</h4>"), signin_path ) %>
+    <div class="small-3 columns signin">
+    <ul>
+    <% if user_signed_in? %> 
+      <li><%= link_to 'My Account', user_url(current_user.id) %></li>
+
+<li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to  "Sign up", new_user_registration_path %></li>
+        <li><%= link_to  "Sign in", new_user_session_path %></li>
+<% end %>
+    </ul>
     </div>
 
   
 
   </div>
-    </div>
+</div>
   <!-- End Nav -->
+  <div class="row">
+     <div class="large-12 columns"> 
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+     </div>
+  </div>
 
 <%= yield %>
 
