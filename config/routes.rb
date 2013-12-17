@@ -1,6 +1,7 @@
 ActorShowtimes::Application.routes.draw do
  
  
+  devise_for :users
   root 'actors#new'
   get '/actors' => 'actors#index', as: 'index'
   resources :actors
@@ -12,10 +13,10 @@ ActorShowtimes::Application.routes.draw do
   end
 
 
-  get '/signup' => 'users#new'
-  get '/signin' => 'sessions#new', as: :signin
-  post 'signin', controller: :logins, action: :create
-  get '/signout' => 'sessions#destroy', as: :signout
+  # get '/signup' => 'users#new'
+  # get '/signin' => 'sessions#new', as: :signin
+  # post 'signin', controller: :logins, action: :create
+  # get '/signout' => 'sessions#destroy', as: :signout
 
   # get 'signin', controller: :logins, action: :new, as: :signin
   # post 'signin', controller: :logins, action: :create
