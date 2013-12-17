@@ -31,8 +31,8 @@
 <% count = 0 %>
 	
 <% @actors.each do |actor| %>
-	<%= "<div class='row'>".html_safe if count%4 ==0 %>
-	 	<div class="small-3 columns">
+	<%= "<div class='row'>".html_safe if count%3 ==0 %>
+	 	<div class="small-4 columns">
 
 			<div class="image-back">
 				<% if actor.picture_url.nil? %>
@@ -50,5 +50,5 @@
 			</div>
 		</div>	
 	<% count = count +1 %>
-	<%= "</div >".html_safe if count%4 ==0 %>
+	<%= "</div >".html_safe if count%3 ==0 %>
 <% end %>
