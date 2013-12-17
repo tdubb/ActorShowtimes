@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131208113622) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actors", force: true do |t|
     t.string   "name"
     t.string   "picture_url"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20131208113622) do
     t.string   "remember_token"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email"
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end
