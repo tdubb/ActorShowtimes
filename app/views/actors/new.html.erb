@@ -30,7 +30,7 @@
 		
 		<%= f.submit "search", :name => "search" %>
 		<% if signed_in? %>
-			<%= f.submit "follow" %>
+			<%= f.submit "follow", :name => "follow" %>
 		<% end %>
 	<% end %>
 	<br> <% if signed_in? %> 

@@ -71,7 +71,7 @@ class ActorsController < ApplicationController
       actor = matches[0]
     end
 
-    if signed_in?
+    if user_signed_in? && params[:search] != "search"
       #verify that these connection do not already exist before creating them
       if !current_user.actors.exists?(actor)
         current_user.actors << actor
@@ -81,10 +81,11 @@ class ActorsController < ApplicationController
       end
     end
   	actor.save
-    @user = User.find(params[:user_id]) if params[:user_id]
+
+    @user = current_user
     
 
-  	if params[:search]
+  	if !!params[:search]
       redirect_to actor_path(actor.id, {:zipcode => params[:actor][:zipcode]})
       # redirect_to :controller => 'actors',:action => 'show', :id => actor.id, :zipcode => params[:actor][:zipcode]
     else
@@ -97,7 +98,7 @@ class ActorsController < ApplicationController
   # end
   def index
     @actor = Actor.new
-    @user = User.find(params[:user_id]) if params[:user_id]
+    @user = current_user
     @actors = @user ? @user.actors.all : Actor.all
   end
 
