@@ -11,6 +11,7 @@ class Scraper
 		@location = "78757"
 	end
 	
+
 	def convert(name)
 		return name.gsub(" ", "+")
 	end
