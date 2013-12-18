@@ -46,7 +46,7 @@ class Scraper
 end
 
 class Theatre
-	attr_accessor  :name, :address, :films
+	attr_accessor  :name, :address, :films, :latlng
 	def initialize(name ="")
 		@name =name
 		@address = ""

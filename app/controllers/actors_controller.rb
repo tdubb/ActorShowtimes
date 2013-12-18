@@ -120,6 +120,13 @@ class ActorsController < ApplicationController
       scrappy.search_for_films(actors_current_films)
       @flicks = scrappy.theatres
     end
+    gon.flicks = @flicks
+    #iterate over hash and record the location
+    @flicks.each do |name, theater|
+      coordinates = Geocoder.coordinates(theater.address)
+      hash1 = @flicks[name]
+       hash1.latlng = coordinates
+    end
   end
 
    def destroy
