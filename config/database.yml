@@ -30,8 +30,8 @@ development:
 #   username: <%= ENV['PGUSER'] %>
 #   password: <%= ENV['PGPASSWORD'] %>
 #   host: localhost
-  
-  production:
+
+production:
   adapter: postgresql
   database: actorshowtimes
   username: <%= ENV['PGUSER'] %>

@@ -11,13 +11,7 @@ class Scraper
 		@location = "78757"
 	end
 	
-<<<<<<< HEAD
-	def get_location
-		return "84101"
-	end
 
-=======
->>>>>>> 33d20ed2c7dbcf3fdf935f0348c19e1936b372e0
 	def convert(name)
 		return name.gsub(" ", "+")
 	end
