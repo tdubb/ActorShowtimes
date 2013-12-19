@@ -9,8 +9,11 @@
 	<div class="row">
 	<div class="small-1 columns" > &nbsp</div>
 		<div class="small-5 columns">
-
-
+		<% if user_signed_in? %>
+<%= link_to "Back", index_path%>
+<% else %>
+<%= link_to "Back", root_path%>
+<% end %>
 	<% if @flicks.empty? %>
 	<p>Sorry to report but we are not aware of any current playing movies starring:</p>
 	<h3><%= @actor.name %></h3>
