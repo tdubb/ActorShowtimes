@@ -8,9 +8,6 @@ ActorShowtimes::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :users do
-    resources :actors, only: [:index, :show]
-  end
 
 
   # get '/signup' => 'users#new'
