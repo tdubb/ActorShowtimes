@@ -6,9 +6,7 @@ body {
 	border-color: black;
 }
 
-#zipcode{
-	width: 200px;
-}
+
 
 .input{
 	
@@ -20,6 +18,12 @@ body {
 	margin-right: auto ;
 }
 
+#zipcode{
+	width: 200px;
+    height: 35px;
+	font-size: larger;
+	text-align: center;
+}
 #actor_name {
 	width: 200px;
     height: 35px;
