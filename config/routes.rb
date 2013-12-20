@@ -6,7 +6,6 @@ ActorShowtimes::Application.routes.draw do
   get '/actors' => 'actors#index', as: 'index'
   resources :actors
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
 
 
 
