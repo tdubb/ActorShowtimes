@@ -2,42 +2,54 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h2 class="centered">Search for an actor</h2>
 
+<div>
+  <form accept-charset="UTF-8" action="/actors" class="new_actor" id="new_actor" method="post">
+  	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  		
+    <div class="row">
+      <div class="small-10">
+        <div class="row">
+  				<% if signed_in? %>
 
+  	        <div class="small-9 columns">
+  	          <input class="right inline" id="actor_name" name="actor[name]" placeholder="Tom Hanks..." type="text">
+  	        </div>
+  	        <div class="small-3 columns">         
+  	          <input class="postfix" name="follow" type="submit" value="Follow">
+  	        </div>
 
+  				<% else %>
 
-<div class="centered">
+  	        <div class="small-9 columns">
+  	          <input class="right inline" id="actor_name" name="actor[name]" placeholder="Tom Hanks..." type="text">
+  	        </div>
 
+          <% end %>     
+        </div>
+      </div>
+    </div>
 
-	<%= form_for @actor do |f| %>
-		<div class="textfield">
-			<%= f.text_field :name, placeholder: "Tom Hanks..." %>
-			<%= text_field_tag 'zipcode', nil, placeholder: "83704" ,:style => "width:200px;" %>
+    <div class="row">
+      <div class="small-10">
+        <div class="row">
+          <div class="small-9 columns">
+            <input class="right inline" id="zipcode" name="zipcode" placeholder="Zipcode 78701" type="text">
+          </div>
+          <div class="small-3 columns">         
+           	<input class="postfix" name="search" type="submit" value="Search">
+          </div>
+        </div>
+      </div>
+    </div>
 
-		</div>
-		<br>
+	</form>
 
-		<% if flash[:notice] %>
-    		<div class="notice"><%= flash[:notice] %></div>
-   	 		<br>
-  		<% end %>
-		
-		<%= f.submit "search", :name => "search" %>
-		<% if signed_in? %>
-			<%= f.submit "follow", :name => "follow" %>
-		<% end %>
+	<br> 
+
+  <% if signed_in? %> 
+		<h2 class="centered"><%= link_to 'My Actors', index_path %></h2>
 	<% end %>
-	<br> <% if signed_in? %> 
-		<%= link_to 'My Actors', index_path %>
-		<% end %>
-
-</div>
 
 </div>

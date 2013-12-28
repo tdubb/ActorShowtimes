@@ -1,73 +1,74 @@
-<body>
 <% require "nokogiri" %>
 <% require "open-uri" %>
 
+<div class="row">
 
+	<div class="small-1 columns"> &nbsp
+	</div>
 
+	<div class="small-5 columns">
 
-
-	<div class="row">
-	<div class="small-1 columns" > &nbsp</div>
-		<div class="small-5 columns">
 		<% if user_signed_in? %>
-<%= link_to "Back", index_path%>
-<% else %>
-<%= link_to "Back", root_path%>
-<% end %>
-	<% if @flicks.empty? %>
-	<p>Sorry to report but we are not aware of any current playing movies starring:</p>
-	<h3><%= @actor.name %></h3>
-	<img src=<%=@actor.picture_url%>>
-	<% else %>
-	<ol>
-		 
-		 	<% @flicks.each do |name, theater| %>
-			<br>
-		<li>
-			<%= theater.name %>
-		</li>
-			
-			<%= theater.address %>
-			
-				<% theater.films.each do |title, film| %>
-				<br>
-					<span class="title"><%= film.title %></span>
-				<br>
-						<%= film.times.gsub(/(nbsp)/, " ") %>
-					<br>
-				<% end %>
-			<% end %>
-		
-	 </ol>
-	 <% end %>
-	</div>
-	 <div class="small-6 columns">
-	 	<div style="text-align:center">
-	 		
-	<% address_array = [] %>
-	<% @flicks.each do |name, theater| %>
-			<% address_array << theater.address %>
-	<% end %>
-
-	<p>
-		
-	<br>
-		<% if @actor.picture_url.nil? %>
-			<h3><%= @actor.name %></h3>
-			<%= image_tag 'no_profile.jpg' %>
+			<%= link_to "Back", index_path%>
+		<% else %>
+			<%= link_to "Back", root_path%>
 		<% end %>
-		</div>
-		<% if !@flicks.empty? %>
-		<div class="centered">
-		<h3><%= @actor.name %></h3>
-		<br>
-		<img src=<%= @actor.picture_url %>>
-		</div>
 
-	 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
+		<% if @flicks.empty? %>
+
+			<p>Sorry to report but we are not aware of any current playing movies starring:</p>
+			<h3><%= @actor.name %></h3>
+			<img src=<%=@actor.picture_url%>>
+
+		<% else %>
+			
+			<ol>		 
+	 			<% @flicks.each do |name, theater| %>
+					<br>
+					<li><%= theater.name %>
+		
+					<%= theater.address %>
+		
+					<% theater.films.each do |title, film| %>
+						<br><br>
+						<span class="title"><%= film.title %></span>
+						<br>
+						<%= film.times.gsub(/(nbsp)/, " ") %>
+						<br>
+					<% end %>
+					</li>
+				<% end %>
 	
-	<% end %>
-
+ 			</ol>
+ 		<% end %>
 	</div>
+
+
+	<div class="small-6 columns">
+		<div style="text-align:center">
+ 		
+			<% if !@flicks.empty? %>
+
+				<div>
+					<h3><%= @actor.name %></h3>
+					<br>
+
+					<% if @actor.picture_url.nil? %>
+						<%= image_tag 'no_profile.jpg' %>
+					<% else %>
+						<img src=<%= @actor.picture_url %>>
+					<% end %>
+					<br>
+				</div>
+
+				<% address_array = [] %>
+				<% @flicks.each do |name, theater| %>
+						<% address_array << theater.address %>
+				<% end %>
+
+			 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:green%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:green%7Clabel:3%7C2901$<%= address_array[2] %>" alt="Austin, TX">
+			
+			<% end %>
+	</div>
+
 </div>
-</body>

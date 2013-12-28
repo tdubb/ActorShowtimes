@@ -1,54 +1,70 @@
 <div class="row">
   <div class="columns twelve centered">
-    
-	<h1 >My Actors</h1>
+    <h1>My Actors</h1>
+  
+    <div>
+      <form accept-charset="UTF-8" action="/actors" class="new_actor" id="new_actor" method="post">
+	
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	
+        <div class="row">
+          <div class="small-10">
+            <div class="row">
+              <div class="small-9 columns">
+                <input class="right inline" id="actor_name" name="actor[name]" placeholder="Tom Hanks..." type="text">
+              </div>
+              <div class="small-3 columns">         
+                <input class="postfix" name="follow" type="submit" value="Follow">
+              </div>
+            </div>
+          </div>
+        </div>
 
-	<div >
+        <div class="row">
+          <div class="small-10">
+            <div class="row">
+              <div class="small-9 columns">
+              <input class="right inline" id="zipcode" name="zipcode" placeholder="Zipcode 78701"  type="text">
+            
+              </div>
+              <div class="small-3 columns">         
+               	<input class="postfix" name="search" type="submit" value="Search">
+              </div>
+            </div>
+          </div>
+        </div>
 
-		<%= form_for @actor do |f| %>
-			<div class="textfield">
-				<%= f.text_field :name, placeholder: 'Tom Hanks...' %>
-				<%= text_field_tag 'zipcode',   nil,placeholder: "83704",:style => "width:200px;" %>
-			</div>
-			<br>
-
-			<% if flash[:notice] %>
-    			<div class="notice"><%= flash[:notice] %></div>
-   	 			<br>
-  			<% end %>
-
-			<div>
-			<%= f.submit "search", :name => "search" %>
-			<%= f.submit "follow", :name => "follow" %>
-			</div>
-		<% end %>
-	</div>
+		  </form>
+    </div>
 
   </div>
 </div>
 
 
-<% count = 0 %>
-	
+<% count = 0 %>	
 <% @actors.each do |actor| %>
+
 	<%= "<div class='row'>".html_safe if count%3 ==0 %>
 	 	<div class="small-4 columns">
 
 			<div class="image-back">
+
 				<% if actor.picture_url.nil? %>
 					<%= image_tag( 'no_profile.jpg', :class =>"pic" )%>
 				<% else %>
 					<img class="pic" src=<%= actor.picture_url %>>
 				<% end %>
+
+				<%= link_to image_tag( 'remove.jpg', :id=> "close"), actor, method: :delete %>
 			</div>
+
 			<div>
-				<%= actor.name %> 
+				<%= link_to "#{actor.name} Showtimes", actor %>	 
 			</div>
-			<div>
-				<%= link_to "Delete Actor", actor, method: :delete %><br>		 
-				<%= link_to "Get Showtimes", actor %>
-			</div>
-		</div>	
+
+		</div>
+
 	<% count = count +1 %>
 	<%= "</div >".html_safe if count%3 ==0 %>
+
 <% end %>

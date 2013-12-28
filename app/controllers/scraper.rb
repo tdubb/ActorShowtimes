@@ -8,7 +8,7 @@ class Scraper
 	def initialize()
 		@theatres = {}
 		# @location = "Austin,+Tx" 
-		@location = "78757"
+		@location = "78701"
 	end
 	
 
