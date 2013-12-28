@@ -6,50 +6,33 @@ body {
 	border-color: black;
 }
 
-
-
-.input{
-	
+#background {
+    height: 100%; 
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+    opacity:0.8;
 }
-.search {
-	text-align: center;
-	
-	margin-left: auto ;
-	margin-right: auto ;
+
+.stretch {
+    width:100%;
+    height:100%;
 }
+
 
 #zipcode{
 	width: 200px;
-    height: 35px;
+  height: 35px;
 	font-size: larger;
 	text-align: center;
 }
+
 #actor_name {
 	width: 200px;
-    height: 35px;
+  height: 35px;
 	font-size: larger;
 	text-align: center;
-
-}
-
-
-.new_actor {
-	margin: auto 0;
-}
-
-ol {
-	list-style-position: inside;
-margin-left: 20px
-}
-li {
-	margin-left: 20px
-	
-}
-
-.title {
-	font-size: 1.2em;
-	margin-left: 20px;
-	color: blue;
 }
 
 
@@ -58,15 +41,28 @@ input.centered {
 	margin-right: auto;
 }
 
+//film title on actor show page
+.title {
+	font-size: 1.2em;
+	color: #FFFE59;  //yellow primary color under foundation.scss
+}
+
 .centered {
 	text-align: center;
 	padding: 0, 0, 0, 0;
-	
-
 }
 
-.textfield {
-	text-align: center;
-	margin-left: 42%;
-	width: 200px;
+//size of actor picture on index page
+.pic{
+height: 170px;
 }
+
+// close button showed over actor pictures
+#close {  
+ 	position: absolute;  
+  top: 0px;  
+  left: 15px;  
+  height: 25px;
+  width: 25px;
+}
+

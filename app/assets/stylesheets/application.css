@@ -9,19 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require foundation_and_overrides
+
  *= require_tree .
  */
-.navbar{
-	background-color: gray
-}
-.signin a {
-  
-	text-decoration: none;
-	color: white;
-}
-.image-back{
-border: 8px solid #666;
-}
-.pic{
-height: 170px;
-}
