@@ -27,5 +27,6 @@ module ActorShowtimes
         Hirb.enable
     end
     config.assets.initialize_on_precompile = false
+    conif.assets.precompile += ['actors.css.scss','foundation_and_overrides.scss','application.js']
   end
 end
