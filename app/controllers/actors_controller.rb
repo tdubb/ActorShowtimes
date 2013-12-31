@@ -71,7 +71,7 @@ class ActorsController < ApplicationController
       actor = matches[0]
     end
 
-    if user_signed_in? && params[:search] != "search"
+    if user_signed_in? && params[:search] != "Search"
       #verify that these connection do not already exist before creating them
       if !current_user.actors.exists?(actor)
         current_user.actors << actor
@@ -79,33 +79,44 @@ class ActorsController < ApplicationController
       if !actor.users.exists?(current_user)
         actor.users << current_user
       end
+      actor.save
     end
-  	actor.save
-
+  	
     @user = current_user
-       
 
   	if !!params[:search]
-      redirect_to actor_path(actor.id, {:zipcode => params[:zipcode]})
-      # redirect_to :controller => 'actors',:action => 'show', :id => actor.id, :zipcode => params[:actor][:zipcode]
+      redirect_to actor_path("unsaved", {dbid: actor.movie_db_id, name: actor.name, pic: actor.picture_url, :zipcode => params[:zipcode]})
+      #redirect_to actor_path(actor.id, {:zipcode => params[:zipcode]})
     else
       redirect_to index_path
     end
   end
 
-  # def index
-  # 	@actors = Actor.all
-  # end
   def index
+    if !user_signed_in?
+      redirect_to :controller=>'actors', :action => 'new'
+    end
     @actor = Actor.new
     @user = current_user
     @actors = @user ? @user.actors.all : Actor.all
   end
 
-
   def show
-    # render  params.inspect
-  	@actor = Actor.find(params[:id])
+    #render  params.inspect
+    if !(params[:id]=="unsaved")
+  	  @actor = Actor.find(params[:id])
+    else
+      @actor = Actor.new
+    end
+    if !!params[:name]
+      @actor.name = params[:name]
+    end
+    if !!params[:dbid]
+      @actor.movie_db_id = params[:dbid]
+    end
+    if !!params[:pic]
+      @actor.picture_url = params[:pic]
+    end
     #given actor store the movie they are inovies
     actors_movies_ids = get_actors_movies_ids(@actor.movie_db_id)  
     
