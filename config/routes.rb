@@ -2,6 +2,9 @@ ActorShowtimes::Application.routes.draw do
  
  
   devise_for :users
+  authenticated do
+    root :to => 'actors#index', as: :authenticated
+  end
   root 'actors#new'
   get '/actors' => 'actors#index', as: 'index'
   resources :actors
