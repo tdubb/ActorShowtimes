@@ -127,7 +127,7 @@ class ActorsController < ApplicationController
     @zipcode = params[:zipcode]
     ip = request.remote_ip 
     obj = Geocoder.search(ip)
-    if @zipcode.length < 5 
+    if !@zipcode.present? || @zipcode.length < 5 
       @zipcode = obj[0].postal_code
     end
     if actors_current_films.length > 0
