@@ -20,6 +20,8 @@ class ActorsController < ApplicationController
     end 
 
   	actor = Actor.new(actor_params)
+    actor.name = actor.name.split.each_with_index.map{|x, index| index > 0 ? x : x.capitalize }.join(" ")
+
 
     Tmdb::Api.key(ENV['THEMOVIEDB_API_KEY'])
 
@@ -28,7 +30,7 @@ class ActorsController < ApplicationController
 
     #error checking
     if actors.length ==0 
-      flash[:notice] = "Oh no...we've never heard of them, are you sure you spelled that right?"
+      flash.now[:notice] = "Oh no...we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
       render 'app/views/actors/new.html.erb'
       return
@@ -41,7 +43,7 @@ class ActorsController < ApplicationController
 
     #error checking
     if first_actor.nil? 
-      flash[:notice] = "Oh no....we've never heard of them, are you sure you spelled that right?"
+      flash.now[:notice] = "Oh no....we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
       render 'app/views/actors/new.html.erb'
       return
