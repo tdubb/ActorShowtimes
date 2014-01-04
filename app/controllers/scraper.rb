@@ -19,30 +19,42 @@ class Scraper
 	def search_for_films(names)
 
 		names.each do |film_name|
-			name = convert(film_name)
+			puts("Search for Film : "+film_name[0]+" imdb : "+film_name[1]);
+			name = convert(film_name[0])
 			doc = Nokogiri::HTML(open("http://www.google.com/movies?hl=en&near=#{@location}&ei=JeSiUsuHDPOO2gWUy4CgCg&q=#{name}")) 
 		
-			#theatre name loop
-			doc.css(".name").each do |theatre_name|
-				if !@theatres[theatre_name.text]
-					@theatres[theatre_name.text] = Theatre.new(theatre_name.text)
-					if !@theatres[theatre_name.text].films[film_name]
-						@theatres[theatre_name.text].films[film_name] = Film.new(film_name)
+			#check for imdb match, prevents returning results for movies with similar names  
+			doc.css(".movie meta[itemprop='sameas']").each do |match|
+				if match["content"].include?(film_name[1])
+					puts("Scraped meta content  is : "+match["content"])
+
+
+					#theatre name loop
+					doc.css(".showtimes .theater .name").each do |theatre_name|
+						puts("Scraped theater Name is : "+theatre_name)
+						if !@theatres[theatre_name.text]
+							@theatres[theatre_name.text] = Theatre.new(theatre_name.text)
+							if !@theatres[theatre_name.text].films[film_name[0]]
+								@theatres[theatre_name.text].films[film_name[0]] = Film.new(film_name[0],film_name[1])
+							end
+						end
+					end
+
+					#addres loop
+					doc.css(".showtimes .theater .address").each_with_index do |address,index|
+						puts("Scraped address is : "+address);
+						@theatres[doc.css(".showtimes .theater .name")[index].text].address = address.text
+					end
+
+					#times loop
+					doc.css(".showtimes .theater .times").each_with_index do |times,index|	
+					  puts("Scraped times is : "+times);			
+						@theatres[doc.css(".showtimes .theater .name")[index].text].films[film_name[0]].times = times.text		 
 					end
 				end
-			end
-
-			#addres loop
-			doc.css(".address").each_with_index do |address,index|
-				@theatres[doc.css(".name")[index].text].address = address.text
-			end
-
-			#times loop
-			doc.css(".times").each_with_index do |times,index|				
-				@theatres[doc.css(".name")[index].text].films[film_name].times = times.text		 
-			end
+  		end
 		end
-  	end
+	end
 end
 
 class Theatre
@@ -55,8 +67,9 @@ class Theatre
 end
 
 class Film
-	attr_accessor :title, :times
-	def initialize(name ="")
+	attr_accessor :title, :imdb, :times
+	def initialize(name ="",imdb="")
 		@title =name
+		@imdb = imdb
 	end
 end

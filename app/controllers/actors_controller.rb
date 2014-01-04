@@ -117,12 +117,15 @@ class ActorsController < ApplicationController
     if !!params[:pic]
       @actor.picture_url = params[:pic]
     end
-    #given actor store the movie they are inovies
+    #given the actor, look up the movie they are in
     actors_movies_ids = get_actors_movies_ids(@actor.movie_db_id)  
     
     #check current movies for actor
     actors_current_films = get_actors_playing_films(actors_movies_ids)
     
+    #check all movies for actor
+    # actors_current_films = get_actors_films(@actor.movie_db_id)
+
     @flicks={}
     @zipcode = params[:zipcode]
     ip = request.remote_ip 
@@ -154,7 +157,7 @@ class ActorsController < ApplicationController
   	params.require(:actor).permit(:name)
   end
 
- #given actor store the movie they are inovies
+ #given actor store the movie they are in
   def get_actors_movies_ids(actor_moviedb_id)  
     credits = Tmdb::People.credits(actor_moviedb_id)
     actors_movies = credits["cast"]
@@ -168,13 +171,30 @@ class ActorsController < ApplicationController
   def get_actors_playing_films(actors_movies_ids)
     films = Tmdb::Movie.now_playing
     actors_playing_films = []
-    films.each do |x|
-      title = x["title"]
-      if actors_movies_ids.include? x["id"]
-        actors_playing_films << title
+    films.each do |movie|
+      title = movie["title"]
+      id = movie["id"]
+      film = Tmdb::Movie.detail(id)
+      imdb = film.imdb_id
+      if actors_movies_ids.include? id
+        actors_playing_films << [title,imdb]
       end
     end
     actors_playing_films
+  end
+
+  def get_actors_films(actor_moviedb_id)
+    credits = Tmdb::People.credits(actor_moviedb_id)
+    actors_movies = credits["cast"]
+    actors_films = []
+    actors_movies.each do |movie|
+      title = movie["title"]
+      id = movie["id"]
+      film = Tmdb::Movie.detail(id)
+      imdb = film.imdb_id
+      actors_films << [title,imdb]
+    end
+    actors_films
   end
 
 end     
