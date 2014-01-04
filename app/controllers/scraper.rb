@@ -105,7 +105,7 @@ class Scraper
 
 		doc.css(".movie_results .theater .desc").each do |desc|
 
-			theatre_name = desc.children[0] #doc.css(".movie_results .theater ##{desc_id} .name").first
+			theatre_name = desc.css(".name").first #desc.children[0] #doc.css(".movie_results .theater ##{desc_id} .name").first
 			puts("Scraped theater Name is : "+theatre_name)						
 			if !@theatres[theatre_name.text]
 				@theatres[theatre_name.text] = Theatre.new(theatre_name.text)
@@ -124,13 +124,22 @@ class Scraper
 
 			showtimes = desc.next()
 			showtimes.css(".movie").each do |movie|
-				title = movie.children[0]
+				title = movie.css(".name").first #movie.children[0]
 				puts("Scraped movie title is : "+title.text)
 				if !@theatres[theatre_name.text].films[title]
 					@theatres[theatre_name.text].films[title.text] = Film.new(title.text)
 				end
 
-				times = movie.children[2]
+				info = movie.css(".info").first
+				#puts("Scraped movie info is : "+info.text)
+				info.css("a").each do |a|
+					if (a.text.eql? "IMDb")
+						puts("Scraped movie IMDb id  is : "+a["href"].split('/')[5]);
+						@theatres[theatre_name.text].films[title.text].imdb = a["href"].split('/')[5]
+					end
+				end
+
+				times = movie.css(".times").first #movie.children[2]
 				puts("Scraped movie times is : "+times.text)
 				@theatres[theatre_name.text].films[title.text].times = times.text		 
 			end	# of showtimes.css(".movie").each do |movie|

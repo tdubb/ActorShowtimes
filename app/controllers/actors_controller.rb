@@ -124,7 +124,7 @@ class ActorsController < ApplicationController
     # actors_current_films = get_actors_playing_films(actors_movies_ids)
 
     #check all movies for actor
-    actors_current_films = get_actors_films(@actor.movie_db_id)
+    actors_current_film_data = get_actors_films(@actor.movie_db_id)
 
     @flicks={}
     @zipcode = params[:zipcode]
@@ -133,7 +133,7 @@ class ActorsController < ApplicationController
     if !@zipcode.present? || @zipcode.length < 5 
       @zipcode = obj[0].postal_code
     end
-    if actors_current_films.length > 0
+    if actors_current_film_data[0].length > 0 or actors_current_film_data[1].length > 0
       scrappy = Scraper.new
       scrappy.location = @zipcode
       #scrappy.search_for_films(actors_current_films)
@@ -142,7 +142,7 @@ class ActorsController < ApplicationController
       scrappy.theatres.delete_if do |name, theatre|
         films = theatre.films
         films.keep_if do |title, film|
-          actors_current_films.include? title
+          actors_current_film_data[0].include? title or actors_current_film_data[1].include? film.imdb 
         end
         films.empty?
       end
@@ -196,15 +196,19 @@ class ActorsController < ApplicationController
   def get_actors_films(actor_moviedb_id)
     credits = Tmdb::People.credits(actor_moviedb_id)
     actors_movies = credits["cast"]
-    actors_films = []
+    actors_film_titles = []
+    actors_films_imdb = []
     actors_movies.each do |movie|
       title = movie["title"]
-      # id = movie["id"]
-      # film = Tmdb::Movie.detail(id)
-      # imdb = film.imdb_id
-      actors_films << title #[title,imdb]
+      id = movie["id"]
+      film = Tmdb::Movie.detail(id)
+      imdb = film.imdb_id
+      actors_film_titles << title #[title,imdb]
+      if (imdb && imdb.length>0)
+        actors_films_imdb << imdb
+      end
     end
-    actors_films
+    [actors_film_titles,actors_films_imdb]
   end
 
 end     
