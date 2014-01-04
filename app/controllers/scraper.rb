@@ -56,10 +56,9 @@ class Scraper
 	end
 
 	def scrape_all_movie_in_location()	
-		links = []
-		#scrape first page for data and other page links
-		scrape_page_for_showtimes("/movies?near=#{@location}&hl=en&view=list");
-	         
+		links = ["/movies?near=#{@location}&hl=en&view=list"]
+		#scrape first page for other page links      
+	  doc = Nokogiri::HTML(open("http://www.google.com"+links[0]))
 		doc.css("#navbar a").each do |a|
 			link = a["href"]
 			puts("Scraped url is : "+link)	  
@@ -113,8 +112,15 @@ class Scraper
 			end
 
 			address = theatre_name.next #doc.css(".movie_results .theater ##{desc_id} .info").first
+			#strip off phone number
+			val = address.text.split(' - (', 2)
+			if (val)
+				address = val[0]
+			else
+				address =address.text	
+			end
 			puts("Scraped theater address is : "+address)
-			@theatres[theatre_name.text].address = address.text
+			@theatres[theatre_name.text].address = address
 
 			showtimes = desc.next()
 			showtimes.css(".movie").each do |movie|
@@ -169,7 +175,7 @@ class Scraper
 	  #                         </div>
 	  #                     </div>
 	end
-	
+
 end
 
 class Theatre
