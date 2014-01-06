@@ -33,16 +33,23 @@ describe Actor do
   end  
 
   describe "#picture_url" do
-    it "returns the correct name" do
+    it "returns the correct picture_url" do
       actor = FactoryGirl.build(:actor, picture_url: "http://some_image.jpg")
       actor.picture_url.should eql "http://some_image.jpg"
     end
   end 
  
   describe "#movie_db_id" do
-    it "returns the correct name" do
+    it "returns the correct namemoie_db_id" do
       actor = FactoryGirl.build(:actor, movie_db_id: "55")
       actor.movie_db_id.should eql "55"
     end
   end 
+
+  describe "#save" do
+    it "should not save actor without name and movie_db_id" do
+      actor = Actor.new
+      assert !actor.save, "Saved the Actor without a name and movie_db_id"
+    end
+  end
 end

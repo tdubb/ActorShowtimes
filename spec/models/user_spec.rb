@@ -17,7 +17,7 @@ describe User do
     FactoryGirl.build(:user, password: nil).should_not be_valid 
   end
 
-  it "should create a new instance of a user given valid attributes" do
+  it "create a new instance of a user given valid attributes" do
     @user_attr = FactoryGirl.attributes_for(:user)
     User.create!(@user_attr)
   end
