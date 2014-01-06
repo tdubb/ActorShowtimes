@@ -4,8 +4,7 @@ require 'faker'
 FactoryGirl.define do
   factory :actor do |f|
     f.name { Faker::Name.name }
-    f.picture_url { Faker::Internet.url }
- #   f.movie_db_id "1"
+    f.movie_db_id "1"
   end
 end
 
