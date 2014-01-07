@@ -58,8 +58,8 @@
 				<%= link_to image_tag( 'remove.jpg', :id=> "close"), actor, method: :delete %>
 			</div>
 
-			<div>
-				<%= link_to "#{actor.name} Showtimes", actor %>	 
+			<div class="actor_link">
+				<%= link_to "#{actor.name} Showtimes", actor_path({id: actor.id, :zipcode => params[:zipcode]}) %>	 
 			</div>
 
 		</div>
@@ -68,3 +68,19 @@
 	<%= "</div >".html_safe if count%3 ==0 %>
 
 <% end %>
+<script type="text/javascript">
+
+$('form #zipcode').on('keyup change', function() {
+    
+      zipcode = $(this).val();
+
+      $(".actor_link a").each(function(index){
+        
+        href = $(this).attr('href');
+        href = href.split('?',1)[0];
+        $(this).attr('href',href+"?zipcode="+zipcode);
+      }); 
+
+    });
+
+</script>
