@@ -15,6 +15,7 @@ group :development, :test do
 	gem 'sqlite3'
   gem 'rspec-rails' 
   gem 'factory_girl_rails', :require => false
+  gem 'pry-plus'
 end
 
 group :test do 
