@@ -24,7 +24,9 @@
           <div class="small-10">
             <div class="row">
               <div class="small-9 columns">
-              <input class="right inline" id="zipcode" name="zipcode" placeholder="Zipcode 78701"  type="text">
+              <% zip = params[:zipcode] %>
+             
+              <input class="right inline" id="zipcode" name="zipcode" placeholder="Zipcode 78701"  type="text" <%="value=#{zip}"%> >
             
               </div>
               <div class="small-3 columns">         

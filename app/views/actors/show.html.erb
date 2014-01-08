@@ -9,9 +9,9 @@
 	<div class="small-5 columns">
 
 		<% if user_signed_in? %>
-			<%= link_to "Back", index_path%>
+			<%= link_to "Back", index_path({:zipcode => params[:zipcode]})%>
 		<% else %>
-			<%= link_to "Back", root_path%>
+			<%= link_to "Back", root_path({:zipcode => params[:zipcode]})%>
 		<% end %>
 
 		<% if @flicks.empty? %>
