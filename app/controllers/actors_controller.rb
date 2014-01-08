@@ -30,9 +30,13 @@ class ActorsController < ApplicationController
 
     #error checking
     if actors.length ==0 
-      flash.now[:notice] = "Oh no...we've never heard of them, are you sure you spelled that right?"
+      flash[:notice] = "Oh no...we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
-      render 'app/views/actors/new.html.erb'
+      if user_signed_in? 
+        redirect_to index_path({:zipcode => params[:zipcode]})
+      else
+        redirect_to root_path({:zipcode => params[:zipcode]})
+      end
       return
     end
 
@@ -43,10 +47,14 @@ class ActorsController < ApplicationController
 
     #error checking
     if first_actor.nil? 
-      flash.now[:notice] = "Oh no....we've never heard of them, are you sure you spelled that right?"
+      flash[:notice] = "Oh no....we've never heard of them, are you sure you spelled that right?"
       @actor = Actor.new
-      render 'app/views/actors/new.html.erb'
-      return
+      if user_signed_in? 
+        redirect_to index_path({:zipcode => params[:zipcode]})
+      else
+        redirect_to root_path({:zipcode => params[:zipcode]})
+      end
+            return
     end
 
     #save the id
@@ -90,13 +98,13 @@ class ActorsController < ApplicationController
       redirect_to actor_path("unsaved", {dbid: actor.movie_db_id, name: actor.name, pic: actor.picture_url, :zipcode => params[:zipcode]})
       #redirect_to actor_path(actor.id, {:zipcode => params[:zipcode]})
     else
-      redirect_to index_path
+      redirect_to index_path({:zipcode => params[:zipcode]})
     end
   end
 
   def index
     if !user_signed_in?
-      redirect_to :controller=>'actors', :action => 'new'
+      redirect_to root_path({:zipcode => params[:zipcode]})
     end
     @actor = Actor.new
     @user = current_user
