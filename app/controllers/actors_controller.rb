@@ -140,7 +140,7 @@ class ActorsController < ApplicationController
      @address_array =[]
      @title_array =[]
     @zipcode = params[:zipcode]
-    ip = request.remote_ip 
+    ip = request.location.ip 
     obj = Geocoder.search(ip)
     if !@zipcode.present? || @zipcode.length < 5 
       @zipcode = obj[0].postal_code
