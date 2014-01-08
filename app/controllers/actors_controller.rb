@@ -137,6 +137,8 @@ class ActorsController < ApplicationController
     actors_current_film_data = get_actors_films(@actor.movie_db_id)
 
     @flicks={}
+     @address_array =[]
+     @title_array =[]
     @zipcode = params[:zipcode]
     ip = request.remote_ip 
     obj = Geocoder.search(ip)
@@ -157,6 +159,13 @@ class ActorsController < ApplicationController
         films.empty?
       end
 
+      scrappy.theatres.each do |name, theatre|
+         @address_array << theatre.address
+         films = theatre.films
+          films.each do |title, film|
+            @title_array << title
+          end
+       end
       @flicks = scrappy.theatres
     end
   end

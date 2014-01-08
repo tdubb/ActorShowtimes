@@ -3,10 +3,7 @@
 
 <div class="row">
 
-	<div class="small-1 columns"> &nbsp
-	</div>
-
-	<div class="small-5 columns">
+	<div class="small-1 columns"> 
 
 		<% if user_signed_in? %>
 			<%= link_to "Back", index_path({:zipcode => params[:zipcode]})%>
@@ -14,67 +11,108 @@
 			<%= link_to "Back", root_path({:zipcode => params[:zipcode]})%>
 		<% end %>
 
+	</div>
+
+	<div class="small-5 columns">
+
+	
+
+		<div>
+		  <br>
+			<h3><%= @actor.name %></h3>
+			<br>
+			<% if @actor.picture_url.nil? %>
+				<%= image_tag 'no_profile.jpg' %>
+			<% else %>
+				<img src=<%= @actor.picture_url %>>
+			<% end %>
+		</div>
+
+  </div>
+
+	<div class="small-6 columns">
+
 		<% if @flicks.empty? %>
 
 			<p>Sorry to report but we are not aware of any current playing movies starring:</p>
-			<h3><%= @actor.name %></h3>
-			<img src=<%=@actor.picture_url%>>
 
 		<% else %>
-			
-			<ol>		 
+<br>
+<br>
+<br>
+<br>
+<ol>
+			<% @title_array.uniq.each do |x| %>
+				<h5><li><span class="title"><%= x %></span></li></h5><br>
+			<%end%>
+			</ol>
+		<% end %>
+
+	</div>
+</div>
+
+<div class="row">
+<div class="small-12 columns"> 
+<div style="text-align:center">
+<% if !@flicks.empty? %>
+				<% if  @address_array.length >=3 %>
+<!-- 			 		<img style="size: 650x300" 
+			 					border="0" 
+			 					src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>&amp;markers=color:red%7Clabel:3%7C2901$<%= @address_array[2] %>" 
+			 					alt="map"> -->
+			 			
+
+<iframe width="100%" height="330" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=<%= @address_array[0] %>&amp;aq=&amp;ie=UTF8&amp;hq=&amp;hnear=<%=@zipcode%>&amp;t=m&amp;z=13&amp;output=embed&amp;iwloc=near"></iframe><br />
+
+				<% elsif @address_array.length == 2 %>
+					 	<img style="size: 650x300" 
+					 				border="0" 
+					 				src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>" 
+					 				alt="map">
+				<% else %>				 	
+					<img style="size: 650x300" 
+								border="0" 
+								src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>" 
+								alt="map">
+				<% end %>
+<% end %>
+	</div>
+</div>
+
+<div class="row">
+<div class="small-1 columns"> &nbsp
+	</div>
+
+	<div class="small-11 columns">
+			<ol>	 
 	 			<% @flicks.each do |name, theater| %>
 					<br>
-					<li><%= theater.name %>
-		
-					<%= theater.address %>
-		
-					<% theater.films.each do |title, film| %>
-						<br><br>
-						<span class="title"><%= film.title %></span>
+					<li>
+					<span>
+								<%= theater.name %>
+								<%= theater.address %>		
+					</span>
+
+					<span>
+						<% theater.films.each do |title, film| %>
 						<br>
+						<span class="title"><%= film.title %></span>
+						
 						<%= film.times.gsub(/(nbsp)/, " ") %>
 						<br>
-					<% end %>
+						<% end %>
+					</span>
+
 					</li>
 				<% end %>
 	
  			</ol>
- 		<% end %>
+ 	
 	</div>
 
 
 	<div class="small-6 columns">
-		<div style="text-align:center">
- 		
-			<% if !@flicks.empty? %>
-
-				<div>
-					<h3><%= @actor.name %></h3>
-					<br>
-
-					<% if @actor.picture_url.nil? %>
-						<%= image_tag 'no_profile.jpg' %>
-					<% else %>
-						<img src=<%= @actor.picture_url %>>
-					<% end %>
-					<br>
-				</div>
-
-				<% address_array = [] %>
-				<% @flicks.each do |name, theater| %>
-						<% address_array << theater.address %>
-				<% end %>
-
-				<% if  address_array.length >=3 %>
-			 		<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= address_array[1] %>&amp;markers=color:red%7Clabel:3%7C2901$<%= address_array[2] %>" alt="map">
-				<% elsif address_array.length == 2 %>
-					 	<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= address_array[1] %>" alt="map">
-				<% else %>				 	
-					<img style="size: 600x300" border="0" src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=600x600&amp;sensor=false&amp;zoom=10&amp;markers=color:green%7Clabel:1%7C2901$<%= address_array[0] %>" alt="map">
-				<% end %>
-			
-			<% end %>
+		&nbsp
 	</div>
 
 </div>
