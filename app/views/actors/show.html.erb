@@ -58,7 +58,7 @@
 				<% if  @address_array.length >=3 %>
 			 		<img style="size: 650x300" 
 			 					border="0" 
-			 					src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>&amp;markers=color:red%7Clabel:3%7C2901$<%= @address_array[2] %>" 
+			 					src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=11&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>&amp;markers=color:red%7Clabel:3%7C2901$<%= @address_array[2] %>" 
 			 					alt="map">
 			 			
 <!-- 
@@ -67,12 +67,12 @@
 				<% elsif @address_array.length == 2 %>
 					 	<img style="size: 650x300" 
 					 				border="0" 
-					 				src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>" 
+					 				src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=11&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>&amp;markers=color:blue%7Clabel:2%7C2901$<%= @address_array[1] %>" 
 					 				alt="map">
 				<% else %>				 	
 					<img style="size: 650x300" 
 								border="0" 
-								src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=12&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>" 
+								src="//maps.googleapis.com/maps/api/staticmap?center=<%=@zipcode%>&amp;size=650x300&amp;sensor=false&amp;zoom=11&amp;markers=color:green%7Clabel:1%7C2901$<%= @address_array[0] %>" 
 								alt="map">
 				<% end %>
 <% end %>
